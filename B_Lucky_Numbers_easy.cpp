@@ -10,188 +10,136 @@ int main(){
         cout<<74;
         return 0;
      }
-      int x = 0;
-      int  y = 0;
-
       if(s.size()%2 == 1){
     
     for(int i = 0;i<s.size()/2 +1;i++){
         cout<<4;
-    }
-    for(int i = s.size()/2 +1;i<s.size() +1;i++){
+   }
+     for(int i = s.size()/2 +1;i<s.size() +1;i++){
         cout<<7;
 
-    }
-    
-      return 0;
+   }
+    return 0;
+ }
+ int a = 0,b = 0;
+     int f1 = s.size(),f2 = s.size(),f3 = 0;
+         for(int i = 0;i<s.size();i++){
+               if(s[i] > '7' && f1 == s.size()){
+                  f3 = 1;
+                  break;
+               }
+               else if(s[i] == '7'){
+                b++;
+               }
+               else if(s[i] == '4'){
+                a++;
+               }
+               else if(s[i]< '7' && s[i] > '4'){
+                f1 = min(f1,i);
+                   break;
+               }
+               else if(s[i] <'4'){
+                   f2 = i;
+                   break;
+               }
+         }
+         int n = s.size();
+         
+         if(f3 == 1  ){
+          for(int i = 0;i<s.size() +2;i++){
+            if(i >= s.size()/2 +1){
+              cout<<7;
+            }
+            else{
+              cout<<4;
+             }
+           }
       }
-      int f = 0;
-      
-      int flag  = 0;
-      int d  = 0;
-      int num = 0;
-      int big;
-      int small;
-    for(int i = 0;i < s.size()/2;i++){
-        if(s[i] -48 == 7){
-             f++;
-        }
-        else if(s[i] -48 > 7){
-              flag = 1;
-               big = i;
-              d++;     
-        }
-        else if(s[i] -48 < 4){
-            big = i;
-        }
-    }
-    int num2 = 0;  
-      for(int i = 0;i < s.size();i++){
-        if(s[i] -48 == 7){
-             num++;
-        }  
-        else if(s[i] -48 == 4){
-             num2++;
-        }  
-        else if(s[i] -48 > 7){
-              flag = 1;
-               big = i;
-              d++;     
-        }
-        else if(s[i] -48 < 4){
-            big = i;
-        } 
-    }  
-    if(num == num2 && num == s.size()/2){
-        cout<<s;
-        return 0;
-    }
-    else if((num == s.size()/2 && num2 ==  s.size()/2 -1) ||( num == s.size()/2-1 && num2 ==  s.size()/2) ){
-         if(s[big] - 48 < 4 && num2 ==  s.size()/2 -1 ){
-            s[big] = '4';
-            cout<<s;
-            return 0;
+         else if(a == b  && b ==  s.size()/2){
+             cout<<s;
+         }
+         else if( a>n/2){
+           for(int i = 0;i<s.size() ;i++){
+            if(i >= s.size()){
+              cout<<7;
+            }
+            else{
+              cout<<4;
+             }
+           }
+      }
+         
+         else if(min(f1,f2) == f1 &&  f1 < s.size()/2 ){
+                  for(int i = 0;i<f1;i++){
+                    cout<<s[i];
+                  }
+                  cout<<7;
+                  a = s.size()/2 - a;
+                  while(a--){
+                    cout<<4;
+                  }
+                  b = b+1;
+                  b = n/2  - b;
+                    while(b--){
+                    cout<<7;
+                  }
+         } 
+         else if(f2 != n){
+              for(int i = 0;i<f2;i++){
+                    cout<<s[i];
+                  }
+                  cout<<4;
+                  a = s.size()/2 - a-1;
+                  while(a--){
+                    cout<<4;
+                  }
+                  
+                  b = n/2  - b;
+                    while(b--){
+                    cout<<7;
+                  }
          }
          else{
-            if(s[big] - 48 < 7 && num == s.size()/2-1){
-                s[big] = '7';
-                cout<<s;
-                return 0;
+          a = 0, b =0;
+         int k = n;
+          for(int i = 0;i<s.size()/2;i++){
+            k = i;
+            if(s[i] == '7'){
+                b++;
             }
             else{
-          int size = s.size() +2;
-                for(int i = 0;i<size/2 ;i++){
-                   cout<<4;
-               }
-             for(int i = size/2 ;i<size;i++){
-                    cout<<7;
-               
-               }
-                return 0;
+              s[i] == '7';
+
+              b++;
+              a = 1;
+              break;
             }
-         }
-    }
-   else if(f +d == s.size()/2 ){
-          int size = s.size() +2;
-                for(int i = 0;i<size/2 ;i++){
-                   cout<<4;
-               }
-             for(int i = size/2 ;i<size;i++){
-                    cout<<7;
-               
-               }
-                return 0;
-       }
-    else if(num>= s.size()/2){
-        int g ;
-        int flag = 0;
-           for(int i = 0;i<s.size()/2+1;i++){
-            if(s[i] -48 <4){
-                g = i;
-                  flag = 1;
-                  break;  
+          }
+          if(a == 0 && b>= s.size()/2){
+                   for(int i = 0;i<s.size() +2;i++){
+            if(i >= s.size() +1){
+              cout<<7;
             }
+            else{
+              cout<<4;
+             }
            }
-           if(flag == 0){
-            int size = s.size() +2;
-                for(int i = 0;i<size/2 ;i++){
-                   cout<<4;
-               }
-             for(int i = size/2 ;i<size;i++){
-                    cout<<7;
-               
-               }
-                return 0;
-           }
-           else{
-              for(int i = 0;i<s.size();i++){
-                  if(i != g){
-                     if(s[i] - 48 == 4){
-                            x++;
-                     }
-                     else if(s[i] - 48 == 7){
-                            y++;
-                        }
+          }
+          else {
+            a = a-1;
+              for(int i = 0;i<=k;i++){
+                    cout<<s[i];
                   }
-                  else{
-                    s[g] = '4';
-                    x++;
-                    break;
-                  }  
-              }
-              int y ;
-              for(int i = g+1;i<g+1 + s.size()/2 - x;i++){
-                s[i] = '4';
-                y = i;
-              }
-              for(int i = g+1 + s.size()/2 - x;i<s.size();i++){
-                s[i] = '7';
-              }
-              cout<<s;
-              return 0;
-           }
-    }
-     
-      for(int i = 0;i<s.size() ;i++){
-           if(s[i] - 48 == 4){
-            x++;
-           }
-           else if(s[i] - 48 == 7){
-            y++;
-           }
-           else{
-            if(s[i] - 48 < 4){
-                s[i] = '4';
-                x++;
-                break;
-            }
-            else if(s[i] - 48 < 7){
-                s[i] = '7';
-                y++;
-                break;
-            }
-            else{
-               int size = s.size() +2;
-                for(int i = 0;i<size/2 ;i++){
-                   cout<<4;
-               }
-             for(int i = size/2 ;i<size;i++){
+                  
+                  a = s.size()/2 - a;
+                  while(a--){
+                    cout<<4;
+                  }
+                  
+                  b = n/2  - b;
+                    while(b--){
                     cout<<7;
-
-               }
-                return 0;
-            }
+                  }
+          }
          }
-      }
-      int a = s.size()/2-x;
-      int b = s.size()/2 - y;
-
-      for(int i = x+y;i< a + x+y;i++){
-           s[i] = '4';
-      }
-        for(int i =a+ x+y;i< a+b+ x+y;i++){
-           s[i] = '7';
-      }
-      cout<<s;
-      return 0;
 }
