@@ -14,7 +14,18 @@ int main(){
         m[arr[i]]++;
       }
           int count = 0 ;
-          
+          for(auto it  = m.rbegin() ;it != m.rend() ; it++){
+                  int x = it->first;
+                  if(x == count){
+                     continue;
+                  }
+                  else{
+                        int num = a - x;
+                           if(it->second - num >=0) {
+                               count += it->second - num ;
+                           }
+                  }
+          }
        
       cout<<count<<endl;
      }

@@ -1,38 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool cmp(pair<int, int>& a,
-        pair<int, int>& b)
-{
-    return a.second > b.second;
-}
-int main() {
+ 
+int main(){
     int n, m;
     cin >> n >> m;
-    int arr[n];
-    map<int,int> mp;
-    for(int i=0;i<n;i++)
-    {
+  long long int arr[n];
+   
+    for(int i = 0;i<n;i++){
         cin >> arr[i];
     }
-    for(int j=0;j<m;j++)
-    {
-        int a, b;
+    vector<long long int>diff(n+1,0);
+    
+    for(int j = 0;j<m;j++){
+        int a,b;
         cin >> a >> b;
-        for(int i=a;i<=b;i++)
-        {
-            mp[i]++;
-        }
+        diff[a-1] += 1;
+         diff[b] -= 1;
     }
-    vector<pair<int, int>> vec(mp.begin(), mp.end());
-    sort(arr, arr + n, greater<int>());
-    partial_sort(vec.begin(), vec.begin()+n, vec.end(), cmp);
-    long long int sum=0;
-    int i=0;
-    for (auto &it : vec) {
-        sum += it.second*arr[i];
-        i++;
+    for(int i = 1;i<n;i++){
+        diff[i] += diff[i-1];
     }
-    cout << sum << endl;
-    return 0;
+     sort(arr,arr+n,greater<int>());
+
+     sort(diff.begin(),diff.end(),greater<int>());
+     
+     long long int sum = 0;
+     
+     for(int i = 0;i < n;i++){
+        long long int num = diff[i]*arr[i];
+           sum += num;
+     }
+     cout<<sum;
 }
