@@ -1,33 +1,33 @@
-#include<bits/stdc++.h>
+ #include<bits/stdc++.h>
 using namespace std;
 
 int main(){
-    int a;
-    cin>>a;
-    while(a--){
-          int a;
-          cin>>a;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin>>t;
+    
+    while(t--){
+        int n;
+        cin>>n;
           string s;
           cin>>s;
-          set<char>s1;
-          set<char>s2;
-          int r = a;
-          s1.insert(s[0]);
-          for(int i = 1;i<a;i++){
-            int x = s1.size();
-            s1.insert(s[i]);
-        
-             if(x == s1.size()){
-                r = i;
-                break;
-              
-             }
-            
-             
+            map<char,int>m1,m2;
+          for(int i = 0;i<n;i++){
+               m1[s[i]]++;
           }
-          for(int i = r;i<a;i++){
-            s2.insert(s[i]);
+          int ans = m1.size() + m2.size();
+          for(int i = 0;i<n;i++){
+              m2[s[i]]++;
+              m1[s[i]]--;
+              if(m1[s[i]] == 0){
+                  m1.erase(s[i]);
+              }
+               if((m1.size() + m2.size()) >= ans){
+                   ans = (m1.size() + m2.size());
+               }
           }
-          cout<<s1.size()+ s2.size()<<endl;
+          cout<<ans<<endl;
     }
 }

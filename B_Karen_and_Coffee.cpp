@@ -6,9 +6,10 @@ int main(){
         cin>>n>>k>>q;
 
         vector<int>d(200001,0);
+
         for(int i = 0;i<n;i++){
               int a,b;
-              cin>>a,b;
+              cin>>a>>b;
               d[a-1] += 1;
               d[b] -= 1;
         }
