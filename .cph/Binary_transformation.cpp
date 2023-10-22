@@ -23,7 +23,7 @@ int main(){
              }
       }
 
-      long longint flag = n;
+      long long int flag = n;
       long long ans = p.size()*sum;
       sort(p.begin(),p.end());
       long long int one = 0;
