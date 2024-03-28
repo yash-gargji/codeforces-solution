@@ -1,42 +1,52 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define ll long long int
+
+ll max_subarray_sum(const vector<ll>&arr) {
+    ll max_ending_here = arr[0];
+    ll max_so_far = arr[0];
+    
+    for (size_t i = 1; i < arr.size(); ++i) {
+        max_ending_here = max(arr[i], max_ending_here + arr[i]);
+        max_so_far = max(max_so_far, max_ending_here);
+    }
+    
+    return max_so_far;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        int x,y;
-        cin>>x>>y;
-           long long int arr[x];
-           for(int i = 0;i<x;i++){
-            cin>>arr[i];
-           }
-           sort(arr,arr+x);
-               
-              long long int pre[x];
-            pre[0] = arr[0];
-            for(int i = 1;i<x;i++){
-                pre[i] = pre[i-1] + arr[i];
-            }
-                vector<long long int>vin;
+         ll n,k;
+         cin>>n>>k;
+         vector<ll>arr(n);  
+        long long int mod = 1e9+7;
+        long long int sum = 0;
 
-                int f,r;
-                f = -1;
-                r = x-y-1;
-                for(int i = y;i<=2*y;i++){
-                     if(f == -1){
-                        vin.push_back(pre[r] - 0);
-                        
-                     }
-                     else{
-                        vin.push_back(pre[r] - pre[f]);
-                     }
-                     f = f+2;
-                     r  = r+1;
-                }
-                sort(vin.begin(),vin.end());
-                cout<<vin[vin.size() - 1]<<endl;
-
+        for(int i = 0;i<n;i++){
+           cin>>arr[i];
+           sum += arr[i];
+           sum = (sum % mod + mod) % mod; 
+        }
+        ll num = max_subarray_sum(arr);
+        if(num <= 0)
+        {
+            cout<<sum<<endl;
+            continue;
+        }
+        num = num%mod;
+        sum += num;
+        sum = (sum % mod + mod) % mod; 
+        k--;
+        while(k-- ){
+             num = num*2;
+             num = num%mod;
+             sum += num;
+             sum = (sum % mod + mod) % mod;
+        }
+        cout<<sum<<endl;
     }
     return 0;
 }
