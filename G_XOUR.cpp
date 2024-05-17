@@ -25,10 +25,10 @@ int main(){
             for(auto &it:m){
                 vector<int>nums = it.second[0];
                 sort(it.second[1].begin(),it.second[1].end());
-                 sort(nums.begin(),nums.end());
-                  for(int i = 0;i<it.second[1].size();i++){
-                      v[it.second[1][i]] = nums[i];
-                  }
+                sort(nums.begin(),nums.end());
+                for(int i = 0;i<it.second[1].size();i++){
+                    v[it.second[1][i]] = nums[i];
+                }
             }
           for(int i = 0;i<v.size();i++){
               cout<<v[i]<<" ";
