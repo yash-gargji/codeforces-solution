@@ -12,14 +12,31 @@ int  main(){
          int flag = 0;
          int ind = i;
          int j = 0;
-         int count = 0;
 
-         while(count < i){
-            count++;
+         while(j < i){
              if(s[j] < s[ind]){
                  flag = 1;
                  break;
              }
+             else if(s[ind] < s[j]){
+                 break;
+             }
+             j++;
+             ind = (ind+1)%n;
          }
+          if(flag)
+          {
+             ans = i;
+             break;
+          }
      }
+       int num = 0;
+        while(num < k/ans){
+            cout<<s.substr(0,ans);
+            num++;
+        }
+        for(int i = 0;i<k%ans;i++){
+            cout<<s[i];
+        }
+     
 }
