@@ -2,37 +2,39 @@
 using namespace std;
 
 int main(){
-   long int a;
-    cin>>a;
-    long int sum = 0;
-   long int arr[9];
-   
+      int n;
+      cin>>n;
+      vector<int>v(9),dp(n+1,0);
+      vector<pair<int,int>>par(n+1);
+      vector<int>count(9,0);
 
-    for(int i = 0;i<9;i++){
-        cin>>arr[i];
-        sum = sum + arr[i];
-    }
-    if(*min_element(arr,arr+9) > a ){
-        cout<<-1;
-        return 0;
-    }
-    int max = 0;
-    int r;
-    for(int i = 0;i<9;i++){
-        if(a/arr[i] >= max){
-            max = a/arr[i];
-            r = i+1;
-        }
-    }
-    if(max  == 9 && a/sum == 1 && r != 9){
-        for(int i = 9;i != 0;i--){
-          cout<<i;
-    }
-    return 0;
-    }
-    for(int i = 0;i<max;i++){
-          cout<<r;
-    }
-    return 0;
-            
+      for(int i = 0;i<9;i++){
+         cin>>v[i];
+      }
+
+      for(int i = 0;i<9;i++){
+          if(v[i] > n)
+            continue;
+         for(int j = 0;j<=n;j++){
+           if(j - v[i] >= 0){
+             if(dp[j] <= 1 + dp[j - v[i]]){
+                 dp[j] = 1 + dp[j - v[i]];
+                 par[j] = {i,v[i]};
+             }
+           }
+         }
+      }
+      int amount = n;
+      while(dp[amount] != 0 ){
+          count[par[amount].first]++;
+          amount = amount - par[amount].second;
+      }
+      for(int i = 8; i >= 0;i--){
+          while(count[i] > 0){
+             cout<<i+1;
+             count[i]--;
+          }
+      }
+     if(dp[n] == 0)
+       cout<<"-1";
 }
