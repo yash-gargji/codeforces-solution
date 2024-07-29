@@ -70,17 +70,10 @@ int main(){
                      if(x == 2 || y == 2){
                          num = 2;
                      }
-                    cout << b[i2++] << " " << max(x,y)<<endl ;
+                    cout << b[i2++] << " " << num<<endl ;
                 } 
                 else if(i1 < a.size()){
-                   int num;
-                   if(x == 2){
-                      num = y;
-                   }
-                   else{
-                     num = x;
-                   }
-                    cout << a[i1++] << " " <<num <<endl;
+                    cout << a[i1++] << " " <<3 <<endl;
                 }
             }
         } 
