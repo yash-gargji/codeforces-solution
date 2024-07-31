@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+   #include<bits/stdc++.h>
 using namespace std;
 
 int dfs(int node, string s, vector<int>& vis, vector<int> adj[], int& ans) {
