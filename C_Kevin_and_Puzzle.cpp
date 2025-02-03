@@ -28,7 +28,7 @@ int main(){
                    flag = 1;
                    break;
                 }
-                dp[i] = dp[i-1];
+               // dp[i] = dp[i-1];
              }
              if((i+1 == n || a[i+1])  == prev + 1){
                  mp[prev + 1] = (mp[prev + 1] + mp[prev] ) % mod;
