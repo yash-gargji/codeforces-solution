@@ -18,10 +18,10 @@ int main(){
            int f = 0;
            int j = 0;
 
-           while((1 << j) <= x || ((1 << j) <= i)){
+           while( ((1 << j) <= i)){
                int a = (1 << j) & x;
                int b = ((1 << j) & i);
-               if(a != b){
+               if(a == 0 && b != 0){
                  f = 1;
                  break;
                }
@@ -30,6 +30,7 @@ int main(){
             ind = i;
             break;
            }
+           j++;
            num = num | i;
            ans[i] = i;
        }
