@@ -11,10 +11,7 @@ signed main(){
        cin>>n;
        string s;
        cin>>s;
-       int seg = -1;
-       int sum = 0;
-       int count = 0;
-       int ans = 0;
+       int ans = 0,sum = 0,count = 0,tc = 0;
        map<int,int>mp;
        mp[0]++;
        
@@ -23,19 +20,17 @@ signed main(){
              count++;
             else
               count--;
-           ans += ((i+1)*i - seg);
+           ans += (i+2)*(i+1)/2;
            mp[count]++;
-           seg += i;
        } 
-       int tc = mp.begin()->second;
-       sum = mp.begin()->second*mp.begin()->first;
-
+       
        for(auto it : mp){
-          if(it.first == mp.begin()->first)
-            continue;
-          ans += it.second*(tc*it.first - sum);
-          sum += it.first*it.second;
-          tc += it.second;
+          int val = it.first, ct = it.second;
+          if(val != mp.begin()->first){
+             ans += ct*(tc*val - sum);
+          }
+          sum += val*ct;
+          tc += ct;
        }
       cout<<ans/2<<endl;
     }
