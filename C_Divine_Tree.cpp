@@ -20,9 +20,13 @@ signed main(){
         int prev = -1;
 
         int sum = 0;
+        int root = -1;
 
         for(int i = n;i >= 1;i--){
             if(sum + 2*i - 1 + v.size() <= m){
+                if(root == -1){
+                    root = i;
+                }
                 sum += i;
                 if(prev != -1)
                   edg.push_back({prev,i});
@@ -32,16 +36,14 @@ signed main(){
                 v.push_back(i);
             }
         }
-        for(int i = 0;i<v.size();i++){
-            edg.push_back({prev,v[i]});
-            prev = v[i];
-        }
+        for(int i = 0;i<v.size();i++)
+            edg.push_back({1,v[i]});
+        
         if(sum + v.size() != m){
            cout<<"-1\n";
            continue;
         }
-        cout<<edg.size()<<endl;
-
+        cout<<root<<endl;
         for(int i = 0;i<edg.size();i++){
             cout<<edg[i].first<<" "<<edg[i].second<<endl;
         }
