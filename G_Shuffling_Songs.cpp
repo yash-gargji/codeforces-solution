@@ -1,75 +1,45 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int dfs(int mask, vector<int>& dp, map<int, vector<int>>& mp1,map<int, vector<int>>& mp2, vector<pair<int, int>>& v, vector<int>& vis) {
-     if (dp[mask] != -1) {
-          return dp[mask];
-     }
-     int k = mask;
-     dp[mask] = v.size() - __builtin_popcount(mask);
-     int ind = 0;
-      
-     while(ind < v.size()) {
-          if(vis[ind] == 1 || ((1 << ind) & mask) == 0) {
-               ind++;
-               continue;
-          }
-          vis[ind] = 1;
-          for(auto it : mp1[v[ind].first]) {
-            k = k | (1 << it);
-          }
-           
-          for (auto it : mp2[v[ind].second]) {
-               k = k | (1 << it);
-          }
-          ind++;
-     }
-     dp[mask] = dfs(k, dp, mp1,mp2, v, vis);
-
-     return dp[mask];
-}
-
-long long compute_hash(string s) {
-    const int p = 31;
-    const int m = 1e9 + 7;
-    long long hash_value = 0;
-    long long p_pow = 1;
-    for (char c : s) {
-        hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;
-        p_pow = (p_pow * p) % m;
+int func(int prev, int mask, vector<int> adj[], vector<vector<int>>& dp) {
+    if(dp[prev][mask] != -1)
+        return dp[prev][mask];
+    
+    int num = 0;
+    for(auto it : adj[prev]) {
+        if((mask & (1 << it)) != 0)
+            continue;
+        int temp = mask ^ (1 << it);
+        num = max(num, 1 + func(it, temp, adj, dp));
     }
-    return hash_value;
+    return dp[prev][mask] = num;
 }
 
 int main() {
     int t;
     cin >> t;
-
-    while (t--) {
+    while(t--) {
         int n;
         cin >> n;
-        vector<pair<int, int>> v;
-        map<int, vector<int>> mp1,mp2;
+        vector<vector<string>> v(n + 1);
+        vector<int> adj[n + 1];
+        vector<vector<int>> dp(n + 1, vector<int>((1 << (n + 1)), -1));
 
-        for (int i = 0; i < n; i++) {
-            string s1, s2;
-            cin >> s1 >> s2;
-            int hs1 = compute_hash(s1);
-            int hs2 = compute_hash(s2);
-            v.push_back({hs1, hs2});
-            mp1[hs1].push_back(i);
-            mp2[hs2].push_back(i);
+        for(int i = 1; i <= n; i++) {
+            string s1,s2;
+            cin>>s1>>s2;
+            v[i] = {s1,s2};
         }
 
-        vector<int> dp(1 << n, -1);
-        int ans = n;
-        vector<int> vis(n, 0);
-        for (int i = 0; i < n; i++) {
-            if (vis[i] == 0) {
-                ans = min(ans, dfs(1 << i, dp, mp1,mp2, v, vis));
+        for(int i = 0; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(i == 0 || v[i][0] == v[j][0] || v[i][1] == v[j][1]) {
+                    adj[i].push_back(j);
+                }
             }
         }
+        // cout<<adj[1].size()<<endl;
 
-        cout << ans << endl;
+        cout << n - func(0, 1, adj, dp) << endl;
     }
 }
